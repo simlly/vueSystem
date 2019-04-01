@@ -2,7 +2,7 @@
   <div>
     <el-row type="flex" justify="space-between" style="margin:20px 0;">
       <div>
-        <el-button>新增</el-button>
+        <el-button @click="handleAdd">新增</el-button>
         <el-button @click="handleDelets">删除</el-button>
       </div>
       <el-col :span="8">
@@ -79,7 +79,11 @@ export default {
   },
   methods: {
     //   编辑按钮
-    handleEdit(index, row) {},
+    handleEdit(index, row) {
+      console.log(row)
+      this.$router.push(`/admin/goods-edit/${row.id}`)
+      // this.$router.push(`/admin/goods-edit`)
+    },
 
     // 删除按钮
     handleDelete(index, row) {
@@ -130,10 +134,15 @@ export default {
       });
     },
 
+    // 新增按钮
+    handleAdd() {
+      this.$router.push('/admin/goods-add')
+    },
+
     // 搜索框
     handleSearch() {
       this.searchvalue = this.searchvalueCache;
-      this.pageIndex= 1;
+      this.pageIndex = 1;
       this.goodList();
     },
 
@@ -151,6 +160,7 @@ export default {
         this.tableData = res.data.message;
         // 总条数
         this.total = res.data.totalcount;
+        console.log(this.searchvalue);
         // this.input5=res.data.title
         // console.log(res);
       });

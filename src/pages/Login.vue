@@ -43,7 +43,6 @@ export default {
           this.$message.error(message);
         }else{
           this.$router.push('/admin');
-          console.log(this.$router)
         }
       });
     },

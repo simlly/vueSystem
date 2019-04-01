@@ -6,7 +6,7 @@
         <el-button @click="handleDelets">删除</el-button>
       </div>
       <el-col :span="8">
-        <el-input placeholder="请输入内容" v-model="searchvalue" class="input-with-select">
+        <el-input placeholder="请输入内容" v-model="searchvalueCache" class="input-with-select">
           <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
         </el-input>
       </el-col>
@@ -68,8 +68,9 @@ export default {
       pageIndex: 1,
       pageSize: 5,
       searchvalue: "",
+      searchvalueCache: "",
       total: 0,
-      ids:[]
+      ids: []
     };
   },
   //   加载后牛显示列表数据
@@ -100,21 +101,21 @@ export default {
       });
     },
 
- // 多选按钮  遍历生成新的数组 id
+    // 多选按钮  遍历生成新的数组 id
     handleSelectionChange(val) {
-      const ids=val.map(v=>{
-            return v.id
-        })
-    this.ids=ids
+      const ids = val.map(v => {
+        return v.id;
+      });
+      this.ids = ids;
     },
     // 多选删除
-    handleDelets(){
-        console.log(this.ids)
-          if(this.ids==[]){
-            this.$message.error('请选择要删除的数据');
-        }
-         this.$axios({
-        url: `/admin/goods/del/${this.ids.join(',')}`,
+    handleDelets() {
+      console.log(this.ids);
+      if (this.ids == []) {
+        this.$message.error("请选择要删除的数据");
+      }
+      this.$axios({
+        url: `/admin/goods/del/${this.ids.join(",")}`,
         withCredentials: true
       }).then(res => {
         // console.log(res);
@@ -125,15 +126,16 @@ export default {
             type: "success"
           });
           this.goodList();
-        
         }
       });
     },
 
-// 搜索框
-handleSearch(){
-this.goodList();
-},
+    // 搜索框
+    handleSearch() {
+      this.searchvalue = this.searchvalueCache;
+      this.pageIndex= 1;
+      this.goodList();
+    },
 
     // 获取商品数据
     goodList() {
@@ -173,8 +175,7 @@ this.goodList();
       } else {
         this.$refs.multipleTable.clearSelection();
       }
-    },
-   
+    }
   }
 };
 </script>

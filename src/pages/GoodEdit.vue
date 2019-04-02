@@ -1,4 +1,5 @@
 <template>
+<el-row type="flex" :gutter='16'>
   <el-form ref="form" :model="form" label-width="80px" style="margin-top:20px;">
     <el-form-item label="所属类别">
       <!-- value是点击到谁  就根据id显示出title -->
@@ -82,6 +83,7 @@
       <el-button>取消</el-button>
     </el-form-item>
   </el-form>
+  </el-row>
 </template>
 
 <script>
@@ -157,10 +159,15 @@ export default {
 
     //图片相册    删除图片
     handleRemove(file, fileList) {
+
+        // console.log(fileList)
+        // console.log(file)
       this.form.fileList = fileList.map(v => {
-        return v.response;
+        return v;
       });
-      //   console.log( this.form.imgList);
+    // console.log(this.form.fileList)
+    // console.log(file)
+        // console.log( this.form.imgList);
     },
     // 预览图片
     handlePictureCardPreview(file) {
@@ -206,7 +213,7 @@ export default {
 };
 </script>
 
-<style>
+<style  scoped>
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;

@@ -19,7 +19,9 @@ import CategoryList from "./pages/CategoryList.vue"
 import GoodList from "./pages/GoodList.vue"
 import GoodAdd from "./pages/GoodAdd.vue"
 import GoodEdit from "./pages/GoodEdit.vue"
-
+import CategoryAdd from "./pages/CategoryAdd.vue"
+// 引入store
+import store from './store/index'
 // 3.全局注册组件
 Vue.use(ElementUI);
 // 注册路由
@@ -44,6 +46,7 @@ const routes = [
       { path: 'goods-add', component: GoodAdd, meta:'新增列表'},
       { path: 'goods-edit/:id', component: GoodEdit, meta:'编辑列表'},
       { path: 'category-list', component: CategoryList, meta:'栏目列表'},
+      { path: 'category-add', component: CategoryAdd, meta:'新增栏目'},
       
     ]
   }
@@ -55,6 +58,7 @@ const router = new VueRouter({routes})
 new Vue({
   // 路由挂载根实例
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')
 

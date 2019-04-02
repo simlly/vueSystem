@@ -36,13 +36,17 @@ export default {
         data: this.form,
         withCredentials: true
       }).then(res => {
-        console.log(res)
+        console.log(res);
         // 结构
-        const {status,message}=res.data;
-        if(status==1){
+        const { status, message } = res.data;
+        if (status == 1) {
           this.$message.error(message);
-        }else{
-          this.$router.push('/admin');
+        } else {
+          this.$router.push("/admin");
+          this.$store.commit("setUser", {
+            username: message.uname,
+            realname: message.realname
+          });
         }
       });
     },

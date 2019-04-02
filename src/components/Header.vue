@@ -2,13 +2,14 @@
   <el-row type="flex" justify="space-between" align="middle">
     <i class="el-icon-back" @click="handleClick"></i>
     <div>
-      admin 超级管理员
+     {{user.username}} {{user.realname}}
       <span class="back" @click="handleBack">退出</span>
     </div>
   </el-row>
 </template>
 
 <script>
+import {mapState} from "vuex";
 export default {
   methods: {
     handleClick(){
@@ -26,6 +27,11 @@ export default {
         }
       })
 
+    },
+    computed: {
+        ...mapState({
+            user: "user"
+        })
     }
   }
 };
